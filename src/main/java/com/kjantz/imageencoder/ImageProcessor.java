@@ -86,12 +86,16 @@ public class ImageProcessor {
    * @throws IOException if sending the image failed for any reason
    */
   public ImageProcessor sentToSocket(@NotNull String host, int port, @NotNull OutputFormat outputFormat) throws IOException {
-    Socket s = new Socket(host, port);
-    long start = System.currentTimeMillis();
-    outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()));
-    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image sent to %s:%d, took %d ms", host, port, System.currentTimeMillis() - start));
-    s.close();
-   return this;
+    try {
+      Socket s = new Socket(host, port);
+      long start = System.currentTimeMillis();
+      outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()));
+      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image sent to %s:%d, took %d ms", host, port, System.currentTimeMillis() - start));
+      s.close();
+    } catch (IOException e) {
+      throw new IOException(String.format("could not sent image to host: %s:%d, make sure receiving server is running.",host, port), e);
+    }
+    return this;
   }
 
   /**
@@ -108,7 +112,7 @@ public class ImageProcessor {
       outputFile = outFileOrDirectory;
     else {
       if (pathToImage == null && outFileOrDirectory == null) {
-        throw new IOException("no output file specified");
+        throw new IOException("Could not save image, no output file name specified.");
       }
 
       if (pathToImage == null) {
@@ -119,9 +123,14 @@ public class ImageProcessor {
       outputFile = new File(out, pathToImage.getName().split("\\.")[0] + "." + outputFormat.getFormatExtension().toLowerCase());
     }
 
-    long start = System.currentTimeMillis();
-    outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)));
-    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image written to %s, took %d ms", outputFile.getAbsoluteFile().toString(), System.currentTimeMillis() - start));
+    try {
+      long start = System.currentTimeMillis();
+      outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)));
+      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image written to %s, took %d ms", outputFile.getAbsoluteFile().toString(), System.currentTimeMillis() - start));
+    }catch (IOException e) {
+      throw new IOException("Could not save image.", e);
+    }
+
     return this;
   }
 
