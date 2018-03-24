@@ -5,11 +5,14 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketHandler implements Runnable {
+/**
+ * internal utility class that reads the input of a socket and writes it to the console.
+ */
+class SocketHandler implements Runnable {
   private Socket socket;
   private OutputStream out;
 
-  public SocketHandler(Socket socket, OutputStream outputStream) {
+  SocketHandler(Socket socket, OutputStream outputStream) {
     this.socket = socket;
     this.out = outputStream;
   }

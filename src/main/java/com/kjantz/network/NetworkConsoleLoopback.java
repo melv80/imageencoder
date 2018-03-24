@@ -1,5 +1,7 @@
 package com.kjantz.network;
 
+import com.kjantz.imageencoder.ImageProcessor;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
@@ -8,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Simple test class, that allows to test the network output of the {@link com.kjantz.imageencoder.ImageOutputter}
+ * Simple test class, that allows to test the network output of the {@link ImageProcessor}
  */
 public class NetworkConsoleLoopback {
 
