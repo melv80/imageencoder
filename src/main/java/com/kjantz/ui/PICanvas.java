@@ -1,8 +1,14 @@
 package com.kjantz.ui;
 
 import com.kjantz.imageencoder.ImageProcessor;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class PICanvas extends Canvas {
@@ -11,6 +17,7 @@ public class PICanvas extends Canvas {
 
   private double pixelWidthX, pixelWidthY;
   private GraphicsContext gc;
+  private SimpleObjectProperty<Color> colorProperty = new SimpleObjectProperty<>(Color.WHITE);
 
   public PICanvas(double width, double height, int outputX, int outputY) {
     super(width, height);
@@ -19,6 +26,14 @@ public class PICanvas extends Canvas {
     this.pixelWidthX = width / outputX;
     this.pixelWidthY = height / outputY;
     this.gc = getGraphicsContext2D();
+    EventHandler<MouseEvent> mouseEventEventHandler = t -> {
+
+      int x = (int) (t.getX() / pixelWidthX);
+      int y = (int) (t.getY() / pixelWidthY);
+      setRGB(x, y, t.getButton() == MouseButton.PRIMARY ? colorProperty.getValue() : Color.BLACK);
+    };
+    addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseEventEventHandler);
+    addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEventEventHandler);
   }
 
   public void clear(Color background) {
@@ -69,4 +84,9 @@ public class PICanvas extends Canvas {
     gc.setFill(color);
     setPixel(x, y);
   }
+
+  public SimpleObjectProperty<Color> getColorProperty() {
+    return colorProperty;
+  }
+
 }

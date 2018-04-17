@@ -102,14 +102,17 @@ public class PISim extends Application {
     Button clearAction = new Button("Clear");
     clearAction.setOnAction(event -> clear());
     buttonPane.add(clearAction, 0, 6, 1, 1);
-
+    ColorPicker colorChooser = new ColorPicker();
+    buttonPane.add(colorChooser, 0, 7, 1, 1);
+    
+    canvas.getColorProperty().bind(colorChooser.valueProperty());
     TitledPane buttons = new TitledPane("Controls", buttonPane);
     borderPane.setRight(buttons);
     borderPane.setBottom(status);
     BorderPane.setAlignment(status, Pos.TOP_LEFT);
     clear();
 
-    // TODO: 17.04.2018 temporary animation 
+    // TODO: 17.04.2018 temporary animation
     /*Animation animation = new Animation(canvas);
     Thread t = new Thread(() -> {
       while (true) {
