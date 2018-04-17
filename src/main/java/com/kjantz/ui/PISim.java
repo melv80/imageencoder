@@ -1,9 +1,11 @@
 package com.kjantz.ui;
 
+import com.kjantz.animation.Animation;
 import com.kjantz.imageencoder.ImageProcessor;
 import com.kjantz.imageencoder.OutputFormat;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,7 +26,7 @@ public class PISim extends Application {
   private static final int DEFAULT_X_OUTPUT = 64;
   private static final int DEFAULT_Y_OUTPUT = 64;
 
-  private final PICanvas canvas = new PICanvas(800  ,600, DEFAULT_X_OUTPUT,DEFAULT_Y_OUTPUT);
+  private final PICanvas canvas = new PICanvas(800, 600, DEFAULT_X_OUTPUT, DEFAULT_Y_OUTPUT);
   private final TextField outputX = new TextField(String.valueOf(DEFAULT_X_OUTPUT));
   private final TextField outputY = new TextField(String.valueOf(DEFAULT_Y_OUTPUT));
   private final TextField network = new TextField("localhost:8181");
@@ -52,10 +54,10 @@ public class PISim extends Application {
     primaryStage.setTitle("PI Simulator");
     BorderPane borderPane = new BorderPane();
     Scene s = new Scene(borderPane, 1280, 768, Color.BLACK);
-    loadImage(new File("c:\\users\\kristianj\\ideaprojects\\imageencoder\\src\\main\\resources\\test.jpg"));
+    //loadImage(new File("c:\\users\\kristianj\\ideaprojects\\imageencoder\\src\\main\\resources\\test.jpg"));
 
 
-    TitledPane pi_output = new TitledPane("PI Output", canvas);
+    TitledPane pi_output = new TitledPane("PI Output", new ScrollPane(canvas));
     borderPane.setCenter(pi_output);
     BorderPane.setAlignment(pi_output, Pos.TOP_LEFT);
 
@@ -97,20 +99,52 @@ public class PISim extends Application {
     });
     buttonPane.add(saveAction, 0, 5, 2, 1);
 
+    Button clearAction = new Button("Clear");
+    clearAction.setOnAction(event -> clear());
+    buttonPane.add(clearAction, 0, 6, 1, 1);
+
     TitledPane buttons = new TitledPane("Controls", buttonPane);
     borderPane.setRight(buttons);
     borderPane.setBottom(status);
-    canvas.setImageProcessor(processor);
+    BorderPane.setAlignment(status, Pos.TOP_LEFT);
+    clear();
+
+    // TODO: 17.04.2018 temporary animation 
+    /*Animation animation = new Animation(canvas);
+    Thread t = new Thread(() -> {
+      while (true) {
+        animation.nextFrame();
+        sleep(1000);
+        clear();
+      }
+    });
+    t.setDaemon(true);
+    t.start();*/
 
     primaryStage.setScene(s);
-    primaryStage.sizeToScene();
-    primaryStage.show();
+    primaryStage.setMaximized(true);
 
-    setStatus("Ready.");
+    primaryStage.show();
+  }
+
+  private void sleep(long duration) {
+    try {
+      Thread.sleep(duration);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void clear() {
+
+    canvas.clear(Color.gray(0));
+    setStatus("Ready Player One.");
   }
 
   public void setStatus(String status) {
-    this.status.setText(String.format("%s: %s ", DATE_FORMAT.format(Date.from(Instant.now())), status));
+    Platform.runLater(() -> {
+      this.status.setText(String.format("%s: %s ", DATE_FORMAT.format(Date.from(Instant.now())), status));
+    });
   }
 
   public void loadImage(@Nullable File file) {
