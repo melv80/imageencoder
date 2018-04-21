@@ -89,7 +89,8 @@ public class ImageProcessor {
     try {
       Socket s = new Socket(host, port);
       long start = System.currentTimeMillis();
-      outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()));
+      if (scaled != null)
+        outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()));
       Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image sent to %s:%d, took %d ms", host, port, System.currentTimeMillis() - start));
       s.close();
     } catch (IOException e) {
@@ -125,7 +126,8 @@ public class ImageProcessor {
 
     try {
       long start = System.currentTimeMillis();
-      outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)));
+      if (scaled != null)
+        outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)));
       Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image written to %s, took %d ms", outputFile.getAbsoluteFile().toString(), System.currentTimeMillis() - start));
     }catch (IOException e) {
       throw new IOException("Could not save image.", e);

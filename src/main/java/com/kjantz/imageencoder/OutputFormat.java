@@ -1,5 +1,7 @@
 package com.kjantz.imageencoder;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -13,7 +15,7 @@ public enum OutputFormat {
    * Simple PNG file format.
    */
   PNG("png") {
-    public void saveImage(BufferedImage img, OutputStream out) throws IOException {
+    public void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out) throws IOException {
       ImageIO.write(img, "png", out);
     }
   },
@@ -22,7 +24,7 @@ public enum OutputFormat {
    * Pixelflut file format.
    */
   PI("pi") {
-    public void saveImage(BufferedImage img, OutputStream out) throws IOException {
+    public void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out) throws IOException {
       PIWriter.saveImage(img, out, false);
     }
   };
@@ -33,7 +35,7 @@ public enum OutputFormat {
     this.formatExtension = formatExtension;
   }
 
-  public abstract void saveImage(BufferedImage img, OutputStream out) throws IOException;
+  public abstract void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out) throws IOException;
 
   public String getFormatExtension() {
     return formatExtension;
