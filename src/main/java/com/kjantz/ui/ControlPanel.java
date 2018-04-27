@@ -105,20 +105,20 @@ public class ControlPanel extends TitledPane {
         startCube.setOnAction((e) -> {
             rotating = !rotating;
             SimpleRenderer renderer = new SimpleRenderer();
-            renderer.setCameraPosition(new Vector3D(0, 0, -10));
+            renderer.setCameraPosition(new Vector3D(0, 0, -20));
 
             int w = 30;
-            int d = 50;
+            int d = 65;
 
             new Thread(() -> {
                 PICanvas canvas = applicationContext.getCanvas();
 
-                int degree = 0;
-                int[] colors = new int[]{0xff0000, 0x00FF00, 0xff};
+                double degree = 0;
+                int[] colors = new int[]{0xff0000, 0xff0000, 0xff0000};
                 ImageProcessor imageProcessor = new ImageProcessor(Constants.DEFAULT_X_OUTPUT, Constants.DEFAULT_Y_OUTPUT);
 
                 while (rotating) {
-                    degree++;
+                    degree+=0.05;
                     degree %= 360;
                     imageProcessor.clear();
                     int vertexIndex = 0;
