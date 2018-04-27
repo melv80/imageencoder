@@ -2,6 +2,7 @@ package com.kjantz.imageencoder;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
@@ -34,6 +35,7 @@ public class ImageProcessor {
   public ImageProcessor(int outputWidth, int outputHeight) {
     this.outputWidth = outputWidth;
     this.outputHeight = outputHeight;
+    this.scaled = new BufferedImage(outputWidth, outputHeight, BufferedImage.TYPE_INT_RGB);
   }
 
   /**
@@ -144,5 +146,10 @@ public class ImageProcessor {
     scaled = scaleOp.filter(im, null);
     Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image scaled to %dx%d pixels", scaled.getWidth(), scaled.getHeight()));
     return this;
+  }
+
+  public void clear() {
+    scaled = new BufferedImage(scaled.getWidth(), scaled.getHeight(), BufferedImage.TYPE_INT_RGB);
+
   }
 }

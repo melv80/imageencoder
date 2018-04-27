@@ -3,6 +3,8 @@ package com.kjantz.ui;
 import com.kjantz.animation.Animation;
 import com.kjantz.imageencoder.ImageProcessor;
 import com.kjantz.imageencoder.OutputFormat;
+import com.kjantz.renderer.SimpleRenderer;
+import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Application;
@@ -15,6 +17,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import java.io.File;
 import java.io.IOException;

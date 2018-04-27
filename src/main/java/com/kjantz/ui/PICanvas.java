@@ -1,6 +1,8 @@
 package com.kjantz.ui;
 
 import com.kjantz.imageencoder.ImageProcessor;
+import com.kjantz.util.Constants;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -65,9 +67,13 @@ public class PICanvas extends Canvas {
     }
 
     public void clear(Color background) {
-        gc.setFill(background);
-        gc.fillRect(0, 0, getWidth(), getHeight());
-        
+//        gc.setFill(background);
+//        gc.fillRect(0, 0, getWidth(), getHeight());
+        for (int x = 0; x < Constants.DEFAULT_X_OUTPUT; x++) {
+            for (int y = 0; y < Constants.DEFAULT_Y_OUTPUT; y++) {
+                setRGB(x, y, background);
+            }
+        }
     }
 
     public void setColor(Color color) {
@@ -75,12 +81,20 @@ public class PICanvas extends Canvas {
     }
 
     public void setImageProcessor(ImageProcessor processor) {
-        for (int x = 0; x < processor.getOutputImage().getWidth(); x++) {
-            for (int y = 0; y < processor.getOutputImage().getHeight(); y++) {
-                int px = processor.getOutputImage().getRGB(x, y);
-                setRGB(x, y, px);
+        Platform.runLater(() -> {
+            for (int x = 0; x < processor.getOutputImage().getWidth(); x++) {
+                for (int y = 0; y < processor.getOutputImage().getHeight(); y++) {
+                    int px = processor.getOutputImage().getRGB(x, y);
+                    setRGB(x, y, px);
+                    int finalX = x;
+                    int finalY = y;
+                    pixelCB.ifPresent(pixelCB -> {
+                        pixelCB.setRGB(finalX, finalY, 0x00FFFFFF&px);
+                    });
+                }
             }
-        }
+        });
+
     }
 
     /**
