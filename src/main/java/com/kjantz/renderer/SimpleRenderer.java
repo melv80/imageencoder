@@ -15,9 +15,7 @@ import org.apache.commons.math3.linear.BlockRealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 import static java.lang.Math.*;
 
@@ -29,31 +27,6 @@ import static java.lang.Math.*;
 public class SimpleRenderer {
 
     // =========================== Class Variables ===========================79
-    public static List<int[]> EDGES = new ArrayList<>();
-    public static List<Vector3D> CUBE = generateCube();
-
-    private static List<Vector3D> generateCube() {
-        List<Vector3D> res = new ArrayList<>();
-        res.add(new Vector3D(-1, +1, -1));
-        res.add(new Vector3D(+1, +1, -1));
-        res.add(new Vector3D(+1, -1, -1));
-        res.add(new Vector3D(-1, -1, -1));
-        res.add(new Vector3D(-1, +1, +1));
-        res.add(new Vector3D(+1, +1, +1));
-        res.add(new Vector3D(+1, -1, +1));
-        res.add(new Vector3D(-1, -1, +1));
-
-        EDGES.add(new int[]{1, 3, 4});
-        EDGES.add(new int[]{0, 2, 5});
-        EDGES.add(new int[]{1, 3, 6});
-        EDGES.add(new int[]{0, 2, 7});
-        EDGES.add(new int[]{0, 5, 7});
-        EDGES.add(new int[]{1, 4, 6});
-        EDGES.add(new int[]{2, 5, 7});
-        EDGES.add(new int[]{3, 4, 6});
-
-        return res;
-    }
 
     // =============================  Variables  =============================79
     private Vector3D cameraPos = new Vector3D(1, 1, 1);

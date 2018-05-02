@@ -45,7 +45,7 @@ public class PICanvas extends Canvas {
         addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEventEventHandler);
 
         try {
-            Socket s = new Socket("192.168.180.2", 81);
+            Socket s = new Socket("192.168.180.3", 81);
             PrintWriter w = new PrintWriter(new OutputStreamWriter(s.getOutputStream()));
             RGBPixelCallback c = new RGBPixelCallback() {
                 @Override

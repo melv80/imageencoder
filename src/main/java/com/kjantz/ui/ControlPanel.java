@@ -2,11 +2,11 @@ package com.kjantz.ui;
 
 import com.kjantz.imageencoder.ImageProcessor;
 import com.kjantz.imageencoder.OutputFormat;
+import com.kjantz.renderer.Simple3DModel;
 import com.kjantz.renderer.SimpleRenderer;
 import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
 import com.sun.istack.internal.Nullable;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,7 +35,7 @@ public class ControlPanel extends TitledPane {
 
     private final TextField outputX = new TextField(String.valueOf(DEFAULT_X_OUTPUT));
     private final TextField outputY = new TextField(String.valueOf(DEFAULT_Y_OUTPUT));
-    private final TextField network = new TextField("192.168.180.2:81");
+    private final TextField network = new TextField("192.168.180.3:81");
     private final TextField repeatDelay = new TextField(String.valueOf(250));
 
     private final Spinner<Integer> repeatSent = new Spinner<>(-1, 10000, 1);
@@ -116,21 +116,22 @@ public class ControlPanel extends TitledPane {
                 double degree = 0;
                 int[] colors = new int[]{0xff0000, 0xff0000, 0xff0000};
                 ImageProcessor imageProcessor = new ImageProcessor(Constants.DEFAULT_X_OUTPUT, Constants.DEFAULT_Y_OUTPUT);
+                Simple3DModel model = Simple3DModel.CUBE;
 
                 while (rotating) {
                     degree+=0.05;
                     degree %= 360;
                     imageProcessor.clear();
                     int vertexIndex = 0;
-                    for (Vector3D coord : CUBE) {
+                    for (Vector3D coord : model.getVertices()) {
                         Vector2D pix = renderer.project(rotateX3D(degree, rotateY3D(degree, coord)));
                         int x = (int) (pix.getX() * w) + d;
                         int y = (int) (pix.getY() * w) + d;
 
-                        int[] indizes = EDGES.get(vertexIndex);
+                        int[] indizes = model.getEdges().get(vertexIndex);
                         for (int j = 0; j < indizes.length; j++) {
-                            int indize = indizes[j];
-                            Vector2D end = renderer.project(rotateX3D(degree, rotateY3D(degree, CUBE.get(indize))));
+                            int index = indizes[j];
+                            Vector2D end = renderer.project(rotateX3D(degree, rotateY3D(degree, model.getVertices().get(index))));
                             int x1 = (int) (end.getX() * w) + d;
                             int y1 = (int) (end.getY() * w) + d;
 
