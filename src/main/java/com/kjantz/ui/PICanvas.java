@@ -1,6 +1,7 @@
 package com.kjantz.ui;
 
 import com.kjantz.imageencoder.ImageProcessor;
+import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,6 +14,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -46,7 +48,7 @@ public class PICanvas extends Canvas {
 
         try {
             Socket s = new Socket("192.168.180.3", 81);
-            PrintWriter w = new PrintWriter(new OutputStreamWriter(s.getOutputStream()));
+            PrintWriter w = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(s.getOutputStream())));
             RGBPixelCallback c = new RGBPixelCallback() {
                 @Override
                 public void setRGB(int x, int y, int color) {
@@ -88,11 +90,38 @@ public class PICanvas extends Canvas {
                     setRGB(x, y, px);
                     int finalX = x;
                     int finalY = y;
-                    pixelCB.ifPresent(pixelCB -> {
-                        pixelCB.setRGB(finalX, finalY, 0x00FFFFFF&px);
+                    Async.execute(() -> {
+                        pixelCB.ifPresent(pixelCB -> {
+                            pixelCB.setRGB(finalX, finalY, (0x00FFFFFF ^ px) & 0x00FFFFFF);
+                        });
                     });
+
                 }
             }
+        });
+
+    }
+
+    private volatile int[][] lastFrame;
+
+    public void setImageRGB(int[][] rgb) {
+        Platform.runLater(() -> {
+            for (int x = 0; x < rgb.length; x++) {
+                for (int y = 0; y < rgb[0].length; y++) {
+                    int px = rgb[x][y];
+                    setRGB(x, y, px);
+                    int finalX = x;
+                    int finalY = y;
+                    if (lastFrame == null || rgb[x][y] != lastFrame[x][y]) {
+                        Async.execute(() -> {
+                            pixelCB.ifPresent(pixelCB -> {
+                                pixelCB.setRGB(finalX, finalY, (0x00FFFFFF ^ px) & 0x00FFFFFF);
+                            });
+                        });
+                    }
+                }
+            }
+            lastFrame = rgb;
         });
 
     }

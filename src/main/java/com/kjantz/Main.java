@@ -2,6 +2,7 @@ package com.kjantz;
 
 import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.imageencoder.ImageProcessor;
+import com.madgag.gif.fmsware.GifDecoder;
 
 import java.io.File;
 import java.io.IOException;

@@ -28,5 +28,14 @@
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-component-api:1.0-alpha-15" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-classworlds:1.2-alpha-6" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-io:1.0-alpha-1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-math3:3.6.1" level="project" />
+    <orderEntry type="library" name="Maven: com.madgag:animated-gif-lib:1.4" level="project" />
+  </component>
+  <component name="sonarModuleSettings">
+    <option name="alternativeWorkingDirPath" value="" />
+    <option name="localAnalysisScripName" value="&lt;PROJECT&gt;" />
+    <option name="serverName" value="&lt;PROJECT&gt;" />
+    <option name="useAlternativeWorkingDir" value="false" />
+    <option name="workingDirSelection" value="&lt;MODULE&gt;" />
   </component>
 </module>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_sarah/database/src/main/java/com/lucanet/sarah/database/model/user/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_sarah/shared/src/main/java/com/lucanet/sarah/shared/datamodel/IdentifiableView.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_sarah/shared/src/main/java/com/lucanet/sarah/shared/datamodel/TreeDataNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_sarah/shared/src/main/java/com/lucanet/sarah/shared/datamodel/attribute/AttributableDimensionType.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_summa/database/src/main/java/com/lucanet/summa/database/model/financial/ledger/LedgerPosition.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_summa/servlet/src/main/java/com/lucanet/summa/servlet/communication/imdb/datamodel/PositionDataModelGenerator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_summa/shared/src/main/java/com/lucanet/summa/shared/fi/fi_conso2/treedatanodes/base/FinancialAreaTreeDataNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_summa/shared/src/main/java/com/lucanet/summa/shared/positionelement/AccountTreeDataNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_summa/shared/src/main/java/com/lucanet/summa/shared/positionelement/TypeOwnerTreeDataNode.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/_vm/src/main/java/com/lucanet/lisa/web/shared/HTTPMessage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../1804/modules/ln/base_data/src/main/java/ln/base_data/other/Symbol.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/MapLogger.iml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/output.log">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/LoginFailueLogEntry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/LoginFailueLogValue.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/LoginFailureDetailedEntry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/LoginKeyDeserializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/MapLogConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/MapLogEntry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/MapLogKey.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/MapLogValue.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/MapLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/DetailsSerializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/KeyDeserializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/KeySerializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/LoginFailueLogValue.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/LoginFailureDetailedEntry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/LoginFailureKey.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/LoginKeyDeserializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/LoginKeySerializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/MapLogKeyDeserializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/MapLogKeyKeyDeserializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/main/java/com/lucanet/maplogger/login/MapLogKeySerializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/test/java/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/test/java/com/lucanet/maplogger/MapLoggerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/src/test/java/com/lucanet/maplogger/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../MapLogger/target/classes/com/lucanet/maplogger/MapLogger.class">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/Main.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/imageencoder/ImageProcessor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/imageencoder/OutputFormat.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/renderer/Simple3DModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/renderer/SimpleRenderer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/ui/ControlPanel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/ui/PICanvas.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/ui/PISim.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/lucanet/LoginFailueLogEntry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/lucanet/MapLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/lucanet/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/lucanet/logger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../lucanet_1801/modules/_sarah/server/src/main/java/com/lucanet/sarah/server/communication/framework/internal/AccessExecutor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../lucanet_1801/modules/_sarah/servlet/src/main/java/com/lucanet/sarah/servlet/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../lucanet_1801/modules/_sarah/servlet/src/main/java/com/lucanet/sarah/servlet/web/session/LucaNetClientJettyServlet.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="IMDB Enhancer" showOnExecute="false" startAsBackgroundTask="true" autoUpdate="true" enhancerClassName="com.lucanet.imdb.imdbenhancer.ASM.ASMEnhancer" enhancerLibraryFolderFromBase="libsandtools/build/imdb" srcFolder="src" srcTestFolder="test" rtFolder="rt" rtTestFolder="rt-test" userHome="$USER_HOME$" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>

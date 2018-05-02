@@ -6,6 +6,7 @@ import com.kjantz.renderer.Simple3DModel;
 import com.kjantz.renderer.SimpleRenderer;
 import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
+import com.madgag.gif.fmsware.GifDecoder;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -236,9 +237,22 @@ public class ControlPanel extends TitledPane {
     public void loadImage(@Nullable File file) {
         if (file == null) return;
         try {
-            applicationContext.getProcessor().loadImage(file);
-            applicationContext.getCanvas().setImageProcessor(applicationContext.getProcessor());
-
+            if (file.getName().endsWith("gif")) {
+                GifDecoder d = new GifDecoder();
+                d.read(file.getAbsolutePath());
+                new Thread(() -> {
+                    for (int i = 0; i < d.getFrameCount();i++) {
+                        applicationContext.getProcessor().loadImage(d.getFrame(i));
+                        applicationContext.getCanvas().setImageRGB(applicationContext.getProcessor().toRGBArray());
+                        Async.sleep(d.getDelay(i));
+                    }
+                    System.out.println("Closing animator thread");
+                    applicationContext.getCanvas().clear(Color.BLACK);
+                }).start();
+            }else {
+                applicationContext.getProcessor().loadImage(file);
+                applicationContext.getCanvas().setImageProcessor(applicationContext.getProcessor());
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);

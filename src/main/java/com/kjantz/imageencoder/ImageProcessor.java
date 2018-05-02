@@ -144,12 +144,21 @@ public class ImageProcessor {
     at.scale((double)outputWidth / im.getWidth() , (double)outputHeight / im.getHeight() );
     AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BICUBIC);
     scaled = scaleOp.filter(im, null);
-    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image scaled to %dx%d pixels", scaled.getWidth(), scaled.getHeight()));
     return this;
   }
 
   public void clear() {
     scaled = new BufferedImage(scaled.getWidth(), scaled.getHeight(), BufferedImage.TYPE_INT_RGB);
 
+  }
+
+  public int[][] toRGBArray() {
+    int[][] rgb = new int[outputWidth][outputHeight];
+    for (int x = 0; x < outputWidth; x++) {
+      for (int y = 0; y < outputHeight; y++) {
+        rgb[x][y] = scaled.getRGB(x, y);
+      }
+    }
+    return rgb;
   }
 }
