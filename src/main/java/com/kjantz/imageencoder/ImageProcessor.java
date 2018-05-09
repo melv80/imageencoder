@@ -55,7 +55,7 @@ public class ImageProcessor {
   public ImageProcessor loadImage(@NotNull File pathToImage) throws IOException {
     BufferedImage im = ImageIO.read(pathToImage);
     this.pathToImage = pathToImage;
-    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image loaded %dx%d pixels", im.getWidth(), im.getHeight()));
+//    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image loaded %dx%d pixels", im.getWidth(), im.getHeight()));
 
     scaleImageToOutput(im);
     return this;
@@ -93,7 +93,7 @@ public class ImageProcessor {
       long start = System.currentTimeMillis();
       if (scaled != null)
         outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()));
-      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image sent to %s:%d, took %d ms", host, port, System.currentTimeMillis() - start));
+//      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image sent to %s:%d, took %d ms", host, port, System.currentTimeMillis() - start));
       s.close();
     } catch (IOException e) {
       throw new IOException(String.format("could not sent image to host: %s:%d, make sure receiving server is running.",host, port), e);
@@ -130,7 +130,7 @@ public class ImageProcessor {
       long start = System.currentTimeMillis();
       if (scaled != null)
         outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)));
-      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image written to %s, took %d ms", outputFile.getAbsoluteFile().toString(), System.currentTimeMillis() - start));
+//      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image written to %s, took %d ms", outputFile.getAbsoluteFile().toString(), System.currentTimeMillis() - start));
     }catch (IOException e) {
       throw new IOException("Could not save image.", e);
     }

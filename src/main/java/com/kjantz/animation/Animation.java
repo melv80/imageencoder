@@ -12,8 +12,8 @@ public class Animation {
   public void nextFrame() {
     boolean setLine = false;
     int setPixel = 0;
-    for (int x = 0; x < 64; x++) {
-      for (int y = 0; y < 64; y++) {
+    for (int x = 0; x < 128; x++) {
+      for (int y = 0; y < 1284; y++) {
         if (setPixel == 0) {
           setLine = Math.random() > 0.98 || setLine;
         }

@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -36,11 +38,13 @@ public class ControlPanel extends TitledPane {
 
     private final TextField outputX = new TextField(String.valueOf(DEFAULT_X_OUTPUT));
     private final TextField outputY = new TextField(String.valueOf(DEFAULT_Y_OUTPUT));
-    private final TextField network = new TextField("192.168.180.3:81");
+    private final TextField network = new TextField("192.168.180.5:81");
     private final TextField repeatDelay = new TextField(String.valueOf(250));
 
     private final Spinner<Integer> repeatSent = new Spinner<>(-1, 10000, 1);
     private final GridPane buttonPane = new GridPane();
+
+    private Vector3D cameraPos = new Vector3D(0, 0, -20);
 
     private boolean rotating = false;
 
@@ -100,13 +104,34 @@ public class ControlPanel extends TitledPane {
         sentAction.setOnAction(sentImageAction);
         buttonPane.add(sentAction, 0, row++, 2, 1);
 
+
+        addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.PLUS) {
+                cameraPos = cameraPos.add(new Vector3D(0, 0, 1));
+            }
+            else if (event.getCode() == KeyCode.MINUS) {
+                cameraPos = cameraPos.add(new Vector3D(0, 0, -1));
+            }
+            else if (event.getCode() == KeyCode.W) {
+                cameraPos = cameraPos.add(new Vector3D(0, -1, 0));
+            }
+            else if (event.getCode() == KeyCode.S) {
+                cameraPos = cameraPos.add(new Vector3D(0, 1, -1));
+            }
+            else if (event.getCode() == KeyCode.A) {
+                cameraPos = cameraPos.add(new Vector3D(-1, 0, 0));
+            }
+            else if (event.getCode() == KeyCode.D) {
+                cameraPos = cameraPos.add(new Vector3D(1, 0, 0));
+            }
+        });
+
         clearAction.setOnAction(event -> clear());
         buttonPane.add(clearAction, 0, row++, 1, 1);
         Button startCube = new Button("Rotate Cube");
         startCube.setOnAction((e) -> {
             rotating = !rotating;
             SimpleRenderer renderer = new SimpleRenderer();
-            renderer.setCameraPosition(new Vector3D(0, 0, -20));
 
             int w = 30;
             int d = 65;
@@ -120,6 +145,7 @@ public class ControlPanel extends TitledPane {
                 Simple3DModel model = Simple3DModel.CUBE;
 
                 while (rotating) {
+                    renderer.setCameraPosition(cameraPos);
                     degree+=0.05;
                     degree %= 360;
                     imageProcessor.clear();

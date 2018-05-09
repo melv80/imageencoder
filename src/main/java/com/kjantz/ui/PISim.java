@@ -27,6 +27,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.function.UnaryOperator;
 
+import static com.kjantz.util.Async.sleep;
 import static com.kjantz.util.Constants.DEFAULT_X_OUTPUT;
 import static com.kjantz.util.Constants.DEFAULT_Y_OUTPUT;
 
@@ -62,18 +63,6 @@ public class PISim extends Application {
     borderPane.setBottom(status);
     BorderPane.setAlignment(status, Pos.TOP_LEFT);
 
-
-    // TODO: 17.04.2018 temporary animation
-    /*Animation animation = new Animation(canvas);
-    Thread t = new Thread(() -> {
-      while (true) {
-        animation.nextFrame();
-        sleep(1000);
-        clear();
-      }
-    });
-    t.setDaemon(true);
-    t.start();*/
 
     primaryStage.setScene(s);
     primaryStage.setMaximized(true);

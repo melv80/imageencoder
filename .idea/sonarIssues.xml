@@ -228,12 +228,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/animation/Animation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/imageencoder/ImageProcessor.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/imageencoder/OutputFormat.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/kjantz/imageencoder/PIWriter.java">
           <value>
             <set />
           </value>
@@ -283,6 +293,131 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/alienDependencies/batikDependency.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_assembly_summa/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_sarah/database/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_sarah/server/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_sarah/servlet/src/main/java/com/lucanet/sarah/servlet/web/AbstractAuthenticationJettyServlet.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_summa/shared/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_vm/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_vm/src/main/java/com/lucanet/lisa/doc/html/converter/html/HTMLParagraphBlock.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_vm/src/main/resources/resources/icons3/svg/logo_lucanet_16.svg">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/_vm/src/main/resources/resources/icons3/svg/small_gear.svg">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/common/dom/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/jvm/ui_clipboard/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/jvm/ui_svg/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/jvm/ui_svg/src/main/java/jvm/ui_svg/AWTImageLoader.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/jvm/ui_svg/src/main/java/jvm/ui_svg/AbstractImageLoader.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/jvm/ui_svg/src/main/java/jvm/ui_svg/FXImageLoader.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/jvm/ui_svg/src/main/resources/resources/icons3/svg/logo_lucanet_16.svg">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/lab/teamide/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/lab/teamvisual/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/lib/grouprep1_shared/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/ln/base_log/src/main/java/ln/base_log/Logger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/ln/base_log/src/main/java/ln/base_log/maplog/MapLogFactory.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/ln/base_log/src/main/java/ln/base_log/maplog/MapLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/ln/base_log/src/main/java/ln/base_log/maplog/login/LoginFailureKey.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../ln_monolith/monolith/modules/ln/base_log/src/test/unit/java/ln/base_log/MapLoggerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../lucanet_1801/modules/_sarah/server/src/main/java/com/lucanet/sarah/server/communication/framework/internal/AccessExecutor.java">
           <value>
             <set />
@@ -294,6 +429,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../lucanet_1801/modules/_sarah/servlet/src/main/java/com/lucanet/sarah/servlet/web/session/LucaNetClientJettyServlet.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../svgtest/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../svgtest/src/main/java/com/lucanet/Test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../svgtest/src/main/java/module-info.java">
           <value>
             <set />
           </value>

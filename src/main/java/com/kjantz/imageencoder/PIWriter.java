@@ -22,10 +22,10 @@ class PIWriter {
     for (int x = 0; x < img.getWidth(); x++) {
       for (int y = 0; y < img.getHeight(); y++) {
         if (alpha) {
-          w.println(String.format("%d %d %s", x, y, Integer.toHexString(img.getRGB(x,y))));
+          w.print(String.format("%d %d %s\n", x, y, Integer.toHexString(img.getRGB(x,y))));
         }
         else {
-          w.println(String.format("%d %d %s", x, y, Integer.toHexString(img.getRGB(x,y) & 0xFFFFFF)));
+          w.print(String.format("%d %d %s\n", x, y, Integer.toHexString(img.getRGB(x,y) & 0xFFFFFF)));
         }
       }
     }
