@@ -28,7 +28,7 @@ public class PICanvas extends Canvas {
     private double pixelWidthX, pixelWidthY;
     private GraphicsContext gc;
     private SimpleObjectProperty<Color> colorProperty = new SimpleObjectProperty<>(Color.WHITE);
-    private Optional<RGBPixelCallback> pixelCB = Optional.empty();
+    private volatile Optional<RGBPixelCallback> pixelCB = Optional.empty();
     private final int[][] lastFrame;
 
     public PICanvas(double width, double height, int outputX, int outputY) {
@@ -43,32 +43,10 @@ public class PICanvas extends Canvas {
 
             int x = (int) (t.getX() / pixelWidthX);
             int y = (int) (t.getY() / pixelWidthY);
-            setRGB(x, y, t.getButton() == MouseButton.PRIMARY ? colorProperty.getValue() : Color.BLACK);
+            setRGB(x, y, t.getButton() == MouseButton.PRIMARY ? colorProperty.getValue() : Color.BLACK, true);
         };
         addEventHandler(MouseEvent.MOUSE_DRAGGED, mouseEventEventHandler);
         addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEventEventHandler);
-
-        try {
-            Socket s = new Socket("192.168.180.5", 81);
-            PrintWriter w = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(s.getOutputStream())));
-            RGBPixelCallback c = new RGBPixelCallback() {
-
-                @Override
-                public void setRGB(int x, int y, int color) {
-                    if (getRGB(x, y) == color) return;
-                    
-                    w.print(String.format("%d %d %s\n", x, y, Integer.toHexString(color)));
-                    w.flush();
-                    lastFrame[x][y] = color;
-                }
-
-            };
-            setPixelCB(c);
-        } catch (IOException e) {
-            e.printStackTrace();  //TODO kja: implement me
-        }
-
-
     }
 
     public void setPixelCB(RGBPixelCallback pixelCB) {
@@ -78,13 +56,17 @@ public class PICanvas extends Canvas {
     public void clear(Color background) {
         for (int x = 0; x < Constants.DEFAULT_X_OUTPUT; x++) {
             for (int y = 0; y < Constants.DEFAULT_Y_OUTPUT; y++) {
-                setRGB(x, y, background);
+                setRGB(x, y, background, true);
             }
         }
     }
 
     public void setColor(Color color) {
         gc.setFill(color);
+    }
+
+    public int[][] getLastFrame() {
+        return lastFrame;
     }
 
     public void setImageProcessor(ImageProcessor processor) {
@@ -97,7 +79,7 @@ public class PICanvas extends Canvas {
                     int finalY = y;
                     Async.execute(() -> {
                         pixelCB.ifPresent(pixelCB -> {
-                            pixelCB.setRGB(finalX, finalY, (px) & 0x00FFFFFF);
+                            pixelCB.setRGB(finalX, finalY, (px) & 0x00FFFFFF, false);
                         });
                     });
 
@@ -119,7 +101,7 @@ public class PICanvas extends Canvas {
                     if (lastFrame == null || rgb[x][y] != lastFrame[x][y]) {
                         Async.execute(() -> {
                             pixelCB.ifPresent(pixelCB -> {
-                                pixelCB.setRGB(finalX, finalY, (px) & 0x00FFFFFF);
+                                pixelCB.setRGB(finalX, finalY, (px) & 0x00FFFFFF, false);
                             });
                         });
                     }
@@ -153,7 +135,12 @@ public class PICanvas extends Canvas {
     }
 
     public int getRGB(int x, int y) {
+        if (x < 0 || x > lastFrame.length || y <0 || y>lastFrame[x].length) return 0;
         return lastFrame[x][y];
+    }
+
+    public void setRGB(int x, int y, Color color) {
+        setRGB(x, y, color, false);
     }
 
     /**
@@ -163,13 +150,13 @@ public class PICanvas extends Canvas {
      * @param y     coordinate
      * @param color color of the pixel
      */
-    public void setRGB(int x, int y, Color color) {
+    public void setRGB(int x, int y, Color color, boolean force) {
         gc.setFill(color);
         setPixel(x, y);
 
         pixelCB.ifPresent(pixelCB -> {
             int rgb = (int) (color.getRed() * 255) << 16 | (int) (color.getGreen() * 255) << 8 | (int) (color.getBlue() * 255);
-            pixelCB.setRGB(x, y, rgb);
+            pixelCB.setRGB(x, y, rgb, force);
         });
     }
 
@@ -179,6 +166,6 @@ public class PICanvas extends Canvas {
 
 
     public interface RGBPixelCallback {
-        void setRGB(int x, int y, int color);
+        void setRGB(int x, int y, int color, boolean force);
     }
 }

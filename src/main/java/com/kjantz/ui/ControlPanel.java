@@ -21,8 +21,11 @@ import javafx.stage.FileChooser;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.UnaryOperator;
 
 import static com.kjantz.renderer.SimpleRenderer.*;
@@ -34,6 +37,7 @@ public class ControlPanel extends TitledPane {
     private final Button clearAction = new Button("Clear");
     private final Button sentAction = new Button("Send Image");
     private final Button loadAction = new Button("Load Image ...");
+    private final Button reconnect = new Button("Reconnect");
 
 
     private final TextField outputX = new TextField(String.valueOf(DEFAULT_X_OUTPUT));
@@ -43,6 +47,7 @@ public class ControlPanel extends TitledPane {
 
     private final Spinner<Integer> repeatSent = new Spinner<>(-1, 10000, 1);
     private final GridPane buttonPane = new GridPane();
+    private Optional<Socket> liveConnection = Optional.empty();
 
     private Vector3D cameraPos = new Vector3D(0, 0, -20);
 
@@ -99,6 +104,7 @@ public class ControlPanel extends TitledPane {
             loadImage(res);
         });
         buttonPane.add(loadAction, 0, row++, 2, 1);
+        buttonPane.add(reconnect, 0, row++, 2, 1);
 
 
         sentAction.setOnAction(sentImageAction);
@@ -180,7 +186,58 @@ public class ControlPanel extends TitledPane {
         applicationContext.getCanvas().getColorProperty().bind(colorChooser.valueProperty());
         setText("Controls");
         setContent(buttonPane);
+        startLiveConnection();
         clear();
+    }
+
+    private void startLiveConnection() {
+        PICanvas canvas = applicationContext.getCanvas();
+        Thread t = new Thread( () -> {
+            reconnect.setOnAction((e) -> {
+                liveConnection.ifPresent(s -> {
+                    try {
+                        s.getOutputStream().flush();
+                        s.close();
+                    } catch (IOException e1) {
+                        // NOOP
+                        e1.printStackTrace();
+                    }
+                    applicationContext.getStatus().accept("Disconnected from PI.");
+                });
+            });
+            
+            while (true) {
+                try {
+                    String[] hostAndPort = network.getText().split(":");
+                    Socket s = new Socket(hostAndPort[0], Integer.valueOf(hostAndPort[1]));
+                    PrintWriter w = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(s.getOutputStream())));
+                    PICanvas.RGBPixelCallback c = (x, y, color, force) -> {
+                        if (canvas.getRGB(x, y) == color && !force) return;
+
+                        w.print(String.format("%d %d %s\n", x, y, Integer.toHexString(color)));
+                        w.flush();
+                        canvas.getLastFrame()[x][y] = color;
+                    };
+
+                    canvas.setPixelCB(c);
+                    liveConnection = Optional.of(s);
+                    applicationContext.getStatus().accept(String.format("Connected to PI (%s).", network.getText()));
+                    while (!s.isClosed()) {
+                        Async.sleep(500);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    int delay = 2000;
+                    applicationContext.getStatus().accept(String.format("Disconnected from PI (%s). Trying to reconnect in %d s", network.getText(), delay /1000));
+                    Async.sleep(delay);
+
+                }
+            }
+        });
+        t.setName("Live Canvas Connector");
+        t.setDaemon(true);
+        t.start();
+
     }
 
     public void drawLine(int x0, int y0, int x1, int y1, int color, ImageProcessor img) {
