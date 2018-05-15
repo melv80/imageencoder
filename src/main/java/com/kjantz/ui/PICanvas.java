@@ -38,7 +38,7 @@ public class PICanvas extends Canvas {
         this.pixelWidthX = width / outputX;
         this.pixelWidthY = height / outputY;
         this.gc = getGraphicsContext2D();
-         lastFrame = new int[outputX][outputY];
+        lastFrame = new int[outputX][outputY];
         EventHandler<MouseEvent> mouseEventEventHandler = t -> {
 
             int x = (int) (t.getX() / pixelWidthX);
@@ -135,12 +135,43 @@ public class PICanvas extends Canvas {
     }
 
     public int getRGB(int x, int y) {
-        if (x < 0 || x > lastFrame.length || y <0 || y>lastFrame[x].length) return 0;
+        if (x < 0 || x > lastFrame.length || y < 0 || y > lastFrame[x].length) return 0;
         return lastFrame[x][y];
     }
 
     public void setRGB(int x, int y, Color color) {
         setRGB(x, y, color, false);
+    }
+
+
+    public void drawLine(int x0, int y0, int x1, int y1, Color color) {
+        int dx = Math.abs(x1 - x0);
+        int dy = Math.abs(y1 - y0);
+
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+
+        int err = dx - dy;
+        int e2;
+
+        while (true) {
+            if ((x0 >= 0 && x0 < Constants.DEFAULT_X_OUTPUT) && (y0 >= 0 && y0 < Constants.DEFAULT_Y_OUTPUT))
+                setRGB(x0, y0, color);
+
+            if (x0 == x1 && y0 == y1)
+                break;
+
+            e2 = 2 * err;
+            if (e2 > -dy) {
+                err = err - dy;
+                x0 = x0 + sx;
+            }
+
+            if (e2 < dx) {
+                err = err + dx;
+                y0 = y0 + sy;
+            }
+        }
     }
 
     /**

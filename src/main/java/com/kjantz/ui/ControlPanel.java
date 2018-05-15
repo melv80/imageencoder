@@ -1,5 +1,6 @@
 package com.kjantz.ui;
 
+import com.kjantz.animation.PIClock;
 import com.kjantz.imageencoder.ImageProcessor;
 import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.renderer.Simple3DModel;
@@ -38,6 +39,7 @@ public class ControlPanel extends TitledPane {
     private final Button sentAction = new Button("Send Image");
     private final Button loadAction = new Button("Load Image ...");
     private final Button reconnect = new Button("Reconnect");
+    private final Button clock = new Button("Clock");
 
 
     private final TextField outputX = new TextField(String.valueOf(DEFAULT_X_OUTPUT));
@@ -106,6 +108,9 @@ public class ControlPanel extends TitledPane {
         buttonPane.add(loadAction, 0, row++, 2, 1);
         buttonPane.add(reconnect, 0, row++, 2, 1);
 
+        buttonPane.add(clock, 0, row++, 2, 1);
+        clock.setOnAction(e -> new PIClock(applicationContext.getCanvas()).start());
+
 
         sentAction.setOnAction(sentImageAction);
         buttonPane.add(sentAction, 0, row++, 2, 1);
@@ -168,7 +173,7 @@ public class ControlPanel extends TitledPane {
                             int x1 = (int) (end.getX() * w) + d;
                             int y1 = (int) (end.getY() * w) + d;
 
-                            drawLine(x, y, x1, y1, colors[j], imageProcessor);
+                            imageProcessor.drawLine(x, y, x1, y1, colors[j]);
                         }
                         vertexIndex++;
                     }
@@ -240,36 +245,7 @@ public class ControlPanel extends TitledPane {
 
     }
 
-    public void drawLine(int x0, int y0, int x1, int y1, int color, ImageProcessor img) {
-        int dx = Math.abs(x1 - x0);
-        int dy = Math.abs(y1 - y0);
 
-        int sx = x0 < x1 ? 1 : -1;
-        int sy = y0 < y1 ? 1 : -1;
-
-        int err = dx - dy;
-        int e2;
-
-        while (true) {
-            if ((x0 >= 0 && x0 < Constants.DEFAULT_X_OUTPUT) && (y0 >= 0 && y0 < Constants.DEFAULT_Y_OUTPUT))
-                img.getOutputImage().setRGB(x0, y0, color);
-
-            if (x0 == x1 && y0 == y1)
-                break;
-
-            e2 = 2 * err;
-            if (e2 > -dy) {
-                err = err - dy;
-                x0 = x0 + sx;
-            }
-
-            if (e2 < dx) {
-                err = err + dx;
-                y0 = y0 + sy;
-            }
-        }
-
-    }
 
     private void sendImage() {
         final int[] repetitions = new int[1];
