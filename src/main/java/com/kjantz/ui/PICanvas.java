@@ -3,6 +3,7 @@ package com.kjantz.ui;
 import com.kjantz.imageencoder.ImageProcessor;
 import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
+import com.kjantz.util.Util;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -186,8 +187,7 @@ public class PICanvas extends Canvas {
         setPixel(x, y);
 
         pixelCB.ifPresent(pixelCB -> {
-            int rgb = (int) (color.getRed() * 255) << 16 | (int) (color.getGreen() * 255) << 8 | (int) (color.getBlue() * 255);
-            pixelCB.setRGB(x, y, rgb, force);
+            pixelCB.setRGB(x, y, Util.toIntColor(color), force);
         });
     }
 

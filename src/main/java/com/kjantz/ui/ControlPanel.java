@@ -7,6 +7,7 @@ import com.kjantz.renderer.Simple3DModel;
 import com.kjantz.renderer.SimpleRenderer;
 import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
+import com.kjantz.util.Util;
 import com.madgag.gif.fmsware.GifDecoder;
 import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
@@ -151,7 +152,7 @@ public class ControlPanel extends TitledPane {
                 PICanvas canvas = applicationContext.getCanvas();
 
                 double degree = 0;
-                int[] colors = new int[]{0xff0000, 0xff0000, 0xff0000};
+
                 ImageProcessor imageProcessor = new ImageProcessor(Constants.DEFAULT_X_OUTPUT, Constants.DEFAULT_Y_OUTPUT);
                 Simple3DModel model = Simple3DModel.CUBE;
 
@@ -173,7 +174,7 @@ public class ControlPanel extends TitledPane {
                             int x1 = (int) (end.getX() * w) + d;
                             int y1 = (int) (end.getY() * w) + d;
 
-                            imageProcessor.drawLine(x, y, x1, y1, colors[j]);
+                            imageProcessor.drawLine(x, y, x1, y1, Util.toIntColor(canvas.getColorProperty().get()));
                         }
                         vertexIndex++;
                     }
