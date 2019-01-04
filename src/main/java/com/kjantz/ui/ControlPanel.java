@@ -193,7 +193,7 @@ public class ControlPanel extends TitledPane {
         setText("Controls");
         setContent(buttonPane);
         startLiveConnection();
-        clear();
+//        clear();
     }
 
     private void startLiveConnection() {

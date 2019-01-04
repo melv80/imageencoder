@@ -27,9 +27,9 @@ public class PIClock {
     private static final double delta = pi_2 / 360;
     // =============================  Variables  =============================79
     private PICanvas canvas;
-    private int r = 40;
-    private int x = 64;
-    private int y = 64;
+    private int r = 15;
+    private int x = 20;
+    private int y = 100;
 
     private Vector2D second = new Vector2D(0, 0);
     private Vector2D minute = new Vector2D(0, 0);
