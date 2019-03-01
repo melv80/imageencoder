@@ -9,7 +9,6 @@ import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
 import com.kjantz.util.Util;
 import com.madgag.gif.fmsware.GifDecoder;
-import com.sun.istack.internal.Nullable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +19,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import org.jetbrains.annotations.Nullable;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 

@@ -1,6 +1,6 @@
 package com.kjantz.imageencoder;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
 import java.io.*;

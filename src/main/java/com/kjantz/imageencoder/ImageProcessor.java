@@ -1,21 +1,16 @@
 package com.kjantz.imageencoder;
 
 import com.kjantz.util.Constants;
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Is used to process images and allows to convert them to different fileformats and sent them directly to a network socket.
@@ -62,6 +57,16 @@ public class ImageProcessor {
 //    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image loaded %dx%d pixels", im.getWidth(), im.getHeight()));
 
         scaleImageToOutput(im);
+        return this;
+    }
+
+    public ImageProcessor loadImage(@NotNull InputStream input) throws IOException {
+        BufferedImage im = ImageIO.read(input);
+
+//    Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image loaded %dx%d pixels", im.getWidth(), im.getHeight()));
+
+        scaleImageToOutput(im);
+        input.close();
         return this;
     }
 

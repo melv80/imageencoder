@@ -6,7 +6,6 @@ import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.renderer.SimpleRenderer;
 import com.kjantz.util.Async;
 import com.kjantz.util.Constants;
-import com.sun.istack.internal.Nullable;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
