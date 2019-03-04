@@ -1,5 +1,6 @@
 package com.kjantz;
 
+import com.kjantz.animation.PIClock;
 import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.imageencoder.ImageProcessor;
 import org.jetbrains.annotations.NotNull;
@@ -60,12 +61,10 @@ public class Main {
     }
 
     private void start(String[] args) throws IOException {
-        if (args.length >= 1 && "-sent".equals(args[0])) {
-            mainLogger.info("sending image");
+        if (args.length >= 1) {
             String host = getHost();
             int port = getPort();
             String input;
-
             if (args.length <= 3) {
                 if (args.length == 3) {
                     host = args[1].split(":")[0];
@@ -77,10 +76,26 @@ public class Main {
                 else
                     input = args[2];
 
-
-                mainLogger.info("sending image to " + host + ":" + port);
                 processor = new ImageProcessor(getWidth(), getHeight());
-                processor.loadImage(new File(input));
+                if ("-sent".equals(args[0])) {
+                    mainLogger.info("sending image");
+                    mainLogger.info("sending image to " + host + ":" + port);
+
+                    processor.loadImage(new File(input));
+                }
+                else if ("-clock".equals(args[0])) {
+                    PIClock piClock = new PIClock(processor);
+                    piClock.start();
+                }
+                else if ("-clear".equals(args[0])) {
+                    processor.clear();
+                }
+                // no command
+                else {
+                    printSynopsis();
+                    return;
+                }
+
                 processor.sentToSocket(host, port, OutputFormat.PI);
             }
 
