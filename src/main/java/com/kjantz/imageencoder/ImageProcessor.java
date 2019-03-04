@@ -164,7 +164,7 @@ public class ImageProcessor {
     }
 
     public void setRGB(int x, int y, int color) {
-        if ((x >= 0 && x < Constants.DEFAULT_X_OUTPUT) && (y >= 0 && y < Constants.DEFAULT_Y_OUTPUT))
+        if ((x >= 0 && x < outputWidth) && (y >= 0 && y < outputHeight))
             getOutputImage().setRGB(x, y, color);
     }
 

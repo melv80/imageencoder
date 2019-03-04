@@ -65,41 +65,39 @@ public class Main {
             String host = getHost();
             int port = getPort();
             String input;
-            if (args.length <= 3) {
-                if (args.length == 3) {
-                    host = args[1].split(":")[0];
-                    port = Integer.parseInt(args[1].split(":")[1]);
-                }
+            if (args.length == 3) {
+                host = args[1].split(":")[0];
+                port = Integer.parseInt(args[1].split(":")[1]);
+            }
 
+
+
+            processor = new ImageProcessor(getWidth(), getHeight());
+            if ("-sent".equals(args[0])) {
                 if (args.length == 2)
                     input = args[1];
                 else
                     input = args[2];
+                
+                mainLogger.info("sending image");
+                mainLogger.info("sending image to " + host + ":" + port);
 
-                processor = new ImageProcessor(getWidth(), getHeight());
-                if ("-sent".equals(args[0])) {
-                    mainLogger.info("sending image");
-                    mainLogger.info("sending image to " + host + ":" + port);
 
-                    processor.loadImage(new File(input));
-                }
-                else if ("-clock".equals(args[0])) {
-                    PIClock piClock = new PIClock(processor);
-                    piClock.start();
-                }
-                else if ("-clear".equals(args[0])) {
-                    processor.clear();
-                }
-                // no command
-                else {
-                    printSynopsis();
-                    return;
-                }
-
-                processor.sentToSocket(host, port, OutputFormat.PI);
+                processor.loadImage(new File(input));
+            } else if ("-clock".equals(args[0])) {
+                PIClock piClock = new PIClock(processor);
+                piClock.start();
+            } else if ("-clear".equals(args[0])) {
+                processor.clear();
+            }
+            // no command
+            else {
+                printSynopsis();
+                return;
             }
 
-            return;
+            processor.sentToSocket(host, port, OutputFormat.PI);
+
         }
 
         printSynopsis();
@@ -110,8 +108,14 @@ public class Main {
         System.out.println("Sent Image to PI");
         System.out.println("program might use default settings if present in file: " + getConfigFile().getAbsolutePath());
         System.out.println("usage: ");
-        System.out.println("-sent localhost:80 pathToImage");
+        System.out.println("[-sent localhost:80 pathToImage");
         System.out.println("-sent pathToImage");
+        System.out.println("**********************************");
+        System.out.println("-clock localhost:80 pathToImage");
+        System.out.println("-clock pathToImage");
+        System.out.println("**********************************");
+        System.out.println("-clear localhost:80 ");
+        System.out.println("-clear");
     }
 
 
