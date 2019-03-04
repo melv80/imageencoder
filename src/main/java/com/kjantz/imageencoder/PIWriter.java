@@ -22,7 +22,7 @@ class PIWriter {
     PrintWriter w = new PrintWriter(new OutputStreamWriter(outStream));
     for (int x = 0; x < img.getWidth(); x++) {
       for (int y = 0; y < img.getHeight(); y++) {
-        if (blendMode == BlendMode.IGNORE && (img.getRGB(x, y) == 0 ||img.getRGB(x, y) == 0xFF000000)) continue;
+        if (blendMode == BlendMode.IGNORE && (img.getRGB(x, y) == 0 || img.getRGB(x, y) == 0x00000000)) continue;
         if (alpha) {
           w.print(String.format("%d %d %s\n", x, y, Integer.toHexString(img.getRGB(x,y))));
         }

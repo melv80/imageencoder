@@ -31,7 +31,7 @@ public class PIClock {
     private PICanvas canvas;
     private int r = 15;
     private int x = 20;
-    private int y = 100;
+    private int y = 104;
 
     private Vector2D second = new Vector2D(0, 0);
     private Vector2D minute = new Vector2D(0, 0);
@@ -91,22 +91,22 @@ public class PIClock {
             processor.setRGB(inner_x, inner_y, 255);
 
             if (steps % 30 == 0) {
-                processor.drawLine(outer_x, outer_y, inner_x, inner_y, 0xFFFFFF);
+                processor.drawLine(outer_x, outer_y, inner_x, inner_y, 0xFFFFFFFF);
             }
 
             final int s = LocalTime.now().getSecond();
             final int m = (LocalTime.now().getMinute()) % 60;
             final int h = (LocalTime.now().getHour()) % 12;
 
-            this.second = drawPointer(60, s, processor, this.second, radius - r / 8, 0xFF0000);
-            minute = drawPointer(60 * 60, m * 60 + s, processor, minute, radius, 255);
-            hour = drawPointer(12 * 60, h * 60 + m, processor, hour, radius - r / 4, 255);
+            this.second = drawPointer(60, s, processor, this.second, radius - r / 8, 0xFFFF0000);
+            minute = drawPointer(60 * 60, m * 60 + s, processor, minute, radius, 0xFF0000FF);
+            hour = drawPointer(12 * 60, h * 60 + m, processor, hour, radius - r / 4, 0xFF0000FF);
         }
     }
 
     private Vector2D drawPointer(int base, int current, ImageProcessor p, Vector2D last, int radius, int color) {
         double degree_s = -(pi_2/ base * current) - Math.PI ;
-        p.drawLine(x, y, (int)last.getX(), (int)last.getY(), 0);
+        p.drawLine(x, y, (int)last.getX(), (int)last.getY(), 0xFF000000);
         Vector2D res = new Vector2D((this.x + Math.sin(degree_s) * radius), (int) (this.y + Math.cos(degree_s) * radius));
         p.drawLine(x, y, (int)res.getX(), (int)res.getY(), color);
         return res;

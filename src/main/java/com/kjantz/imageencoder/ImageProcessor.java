@@ -31,7 +31,7 @@ public class ImageProcessor {
     public ImageProcessor(int outputWidth, int outputHeight) {
         this.outputWidth = outputWidth;
         this.outputHeight = outputHeight;
-        this.scaled = new BufferedImage(outputWidth, outputHeight, BufferedImage.TYPE_INT_RGB);
+        this.scaled = new BufferedImage(outputWidth, outputHeight, BufferedImage.TYPE_INT_ARGB);
     }
 
     /**

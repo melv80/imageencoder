@@ -3,6 +3,7 @@ package com.kjantz;
 import com.kjantz.animation.PIClock;
 import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.imageencoder.ImageProcessor;
+import com.kjantz.util.Async;
 import com.kjantz.util.BlendMode;
 import org.jetbrains.annotations.NotNull;
 
@@ -85,11 +86,17 @@ public class Main {
 
 
                 processor.loadImage(new File(input));
+                processor.sentToSocket(host, port, OutputFormat.PI, BlendMode.IGNORE);
             } else if ("-clock".equals(args[0])) {
                 PIClock piClock = new PIClock(processor);
-                piClock.start();
+                while(true) {
+                    piClock.start();
+                    processor.sentToSocket(host, port, OutputFormat.PI, BlendMode.IGNORE);
+                    Async.sleep(500);
+                }
             } else if ("-clear".equals(args[0])) {
                 processor.clear();
+                processor.sentToSocket(host, port, OutputFormat.PI, BlendMode.IGNORE);
             }
             // no command
             else {
@@ -97,7 +104,7 @@ public class Main {
                 return;
             }
 
-            processor.sentToSocket(host, port, OutputFormat.PI, BlendMode.IGNORE);
+
 
         } else {
             printSynopsis();
