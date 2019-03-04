@@ -1,5 +1,6 @@
 package com.kjantz.imageencoder;
 
+import com.kjantz.util.BlendMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.image.BufferedImage;
@@ -17,10 +18,11 @@ class PIWriter {
    * @param outStream the resulting output stream
    * @param alpha if true the pixel value output will be of format 0xAARRGGBB, otherwise 0xRRGGBB
    */
-  static void saveImage(@NotNull BufferedImage img, @NotNull OutputStream outStream, boolean alpha) {
+  static void saveImage(@NotNull BufferedImage img, @NotNull OutputStream outStream, boolean alpha, BlendMode blendMode) {
     PrintWriter w = new PrintWriter(new OutputStreamWriter(outStream));
     for (int x = 0; x < img.getWidth(); x++) {
       for (int y = 0; y < img.getHeight(); y++) {
+        if (blendMode == BlendMode.IGNORE && (img.getRGB(x, y) == 0 ||img.getRGB(x, y) == 0xFF000000)) continue;
         if (alpha) {
           w.print(String.format("%d %d %s\n", x, y, Integer.toHexString(img.getRGB(x,y))));
         }
@@ -32,4 +34,5 @@ class PIWriter {
     w.flush();
     w.close();
   }
+
 }

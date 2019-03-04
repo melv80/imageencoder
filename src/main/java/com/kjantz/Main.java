@@ -3,6 +3,7 @@ package com.kjantz;
 import com.kjantz.animation.PIClock;
 import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.imageencoder.ImageProcessor;
+import com.kjantz.util.BlendMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -96,11 +97,13 @@ public class Main {
                 return;
             }
 
-            processor.sentToSocket(host, port, OutputFormat.PI);
+            processor.sentToSocket(host, port, OutputFormat.PI, BlendMode.IGNORE);
 
+        } else {
+            printSynopsis();
         }
 
-        printSynopsis();
+
 
     }
 

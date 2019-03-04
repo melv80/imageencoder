@@ -1,7 +1,6 @@
 package com.kjantz.imageencoder;
 
-import com.kjantz.util.Constants;
-import javafx.scene.paint.Color;
+import com.kjantz.util.BlendMode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -97,12 +96,12 @@ public class ImageProcessor {
      * @return this
      * @throws IOException if sending the image failed for any reason
      */
-    public ImageProcessor sentToSocket(@NotNull String host, int port, @NotNull OutputFormat outputFormat) throws IOException {
+    public ImageProcessor sentToSocket(@NotNull String host, int port, @NotNull OutputFormat outputFormat, BlendMode blendMode) throws IOException {
         try {
             Socket s = new Socket(host, port);
             long start = System.currentTimeMillis();
             if (scaled != null)
-                outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()));
+                outputFormat.saveImage(scaled, new BufferedOutputStream(s.getOutputStream()), blendMode);
 //      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image sent to %s:%d, took %d ms", host, port, System.currentTimeMillis() - start));
             s.close();
         } catch (IOException e) {
@@ -119,7 +118,7 @@ public class ImageProcessor {
      * @return this
      * @throws IOException if storing the image failed for any reason
      */
-    public ImageProcessor saveImage(@Nullable File outFileOrDirectory, @NotNull OutputFormat outputFormat) throws IOException {
+    public ImageProcessor saveImage(@Nullable File outFileOrDirectory, @NotNull OutputFormat outputFormat, BlendMode blendMode) throws IOException {
         File outputFile;
 
         if (outFileOrDirectory != null && outFileOrDirectory.isFile())
@@ -140,7 +139,7 @@ public class ImageProcessor {
         try {
             long start = System.currentTimeMillis();
             if (scaled != null)
-                outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)));
+                outputFormat.saveImage(scaled, new BufferedOutputStream(new FileOutputStream(outputFile)), blendMode);
 //      Logger.getLogger(getClass().getName()).log(Level.INFO, String.format("Image written to %s, took %d ms", outputFile.getAbsoluteFile().toString(), System.currentTimeMillis() - start));
         } catch (IOException e) {
             throw new IOException("Could not save image.", e);

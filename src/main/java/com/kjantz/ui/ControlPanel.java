@@ -6,6 +6,7 @@ import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.renderer.Simple3DModel;
 import com.kjantz.renderer.SimpleRenderer;
 import com.kjantz.util.Async;
+import com.kjantz.util.BlendMode;
 import com.kjantz.util.Constants;
 import com.kjantz.util.Util;
 import com.madgag.gif.fmsware.GifDecoder;
@@ -262,9 +263,9 @@ public class ControlPanel extends TitledPane {
 
             while (repetitions[0] > 0 || repetitions[0] == -1) {
                 res.createNewFile();
-                applicationContext.getProcessor().saveImage(res, OutputFormat.PI);
+                applicationContext.getProcessor().saveImage(res, OutputFormat.PI, BlendMode.OVERWRITE);
                 String[] hostAndPort = network.getText().split(":");
-                applicationContext.getProcessor().sentToSocket(hostAndPort[0], Integer.valueOf(hostAndPort[1]), OutputFormat.PI);
+                applicationContext.getProcessor().sentToSocket(hostAndPort[0], Integer.valueOf(hostAndPort[1]), OutputFormat.PI, BlendMode.OVERWRITE);
                 applicationContext.getStatus().accept("Image has been successfully sent to PI.");
 
                 if (repetitions[0] != 0) {

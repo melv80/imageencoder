@@ -1,5 +1,6 @@
 package com.kjantz.imageencoder;
 
+import com.kjantz.util.BlendMode;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
@@ -15,7 +16,7 @@ public enum OutputFormat {
    * Simple PNG file format.
    */
   PNG("png") {
-    public void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out) throws IOException {
+    public void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out, BlendMode blendMode) throws IOException {
       ImageIO.write(img, "png", out);
     }
   },
@@ -24,8 +25,8 @@ public enum OutputFormat {
    * Pixelflut file format.
    */
   PI("pi") {
-    public void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out) throws IOException {
-      PIWriter.saveImage(img, out, false);
+    public void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out, BlendMode blendMode) throws IOException {
+      PIWriter.saveImage(img, out, false, blendMode);
     }
   };
 
@@ -35,7 +36,7 @@ public enum OutputFormat {
     this.formatExtension = formatExtension;
   }
 
-  public abstract void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out) throws IOException;
+  public abstract void saveImage(@NotNull BufferedImage img, @NotNull OutputStream out, BlendMode blendMode) throws IOException;
 
   public String getFormatExtension() {
     return formatExtension;
