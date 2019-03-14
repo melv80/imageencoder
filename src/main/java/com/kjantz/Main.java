@@ -3,6 +3,7 @@ package com.kjantz;
 import com.kjantz.animation.PIClock;
 import com.kjantz.imageencoder.OutputFormat;
 import com.kjantz.imageencoder.ImageProcessor;
+import com.kjantz.remote.RemoteListener;
 import com.kjantz.util.Async;
 import com.kjantz.util.BlendMode;
 import org.jetbrains.annotations.NotNull;
@@ -56,6 +57,10 @@ public class Main {
         return Integer.valueOf(properties.getOrDefault("port", 81).toString());
     }
 
+    public String getRemoteControlHost() {
+        return properties.getOrDefault("remote", "http://localhost:8080").toString();
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException {
         new Main().start(args);
 
@@ -98,6 +103,10 @@ public class Main {
                 processor.clear();
                 processor.sentToSocket(host, port, OutputFormat.PI, BlendMode.IGNORE);
             }
+            else if ("-listen".equals(args[0])) {
+                RemoteListener.create(getRemoteControlHost(), processor);
+            }
+
             // no command
             else {
                 printSynopsis();
