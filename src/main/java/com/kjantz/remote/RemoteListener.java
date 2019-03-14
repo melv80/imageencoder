@@ -4,7 +4,11 @@ import com.kjantz.imageencoder.ImageProcessor;
 import com.kjantz.messagebroker.client.MessageClient;
 import com.kjantz.messagebroker.model.Message;
 
+import java.util.logging.Logger;
+
 public class RemoteListener {
+
+    private final Logger log = Logger.getLogger(getClass().getName());
 
     private ImageProcessor processor;
     private MessageClient client;
@@ -28,7 +32,8 @@ public class RemoteListener {
     }
 
     private void dispatch(Message message) {
-        System.out.println(message);
+        log.info("received a message from "+message.getReceiverUUID());
+        Action.get(message.getMessageText()).execute(processor);
     }
 }
 
