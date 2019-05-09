@@ -77,8 +77,6 @@ public class Main {
                 port = Integer.parseInt(args[1].split(":")[1]);
             }
 
-
-
             processor = new ImageProcessor(getWidth(), getHeight());
             if ("-sent".equals(args[0])) {
                 if (args.length == 2)
